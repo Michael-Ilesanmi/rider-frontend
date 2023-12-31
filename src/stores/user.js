@@ -2,6 +2,7 @@ import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
 import axios from 'axios';
 import router from "@/router";
+import { app } from "@/main.js"
 
 export const useUserStore = defineStore('user', () => {
   const user = ref(null);

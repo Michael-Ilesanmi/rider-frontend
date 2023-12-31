@@ -53,11 +53,12 @@
 <script setup>
 import { FwbInput, FwbButton, FwbRadio, FwbHeading } from 'flowbite-vue';
 import { createToast } from 'mosha-vue-toastify';
-import { onMounted, reactive } from 'vue';
+import { inject, onMounted, reactive } from 'vue';
 import { useRouter } from 'vue-router';
 import axios from 'axios';
 import { useUserStore } from '@/stores/user.js';
 
+const $loading =  inject('$loading');
 const userStore = useUserStore();
 const router = useRouter()
 
@@ -72,13 +73,16 @@ const payload = reactive({
 })
 
 const register = async () => {
+  let loader = $loading.show()
   try {
     const { data } = await axios.post('/register', payload)
     userStore.setToken(data.payload.token)
     userStore.setUser(data.payload.user)
+    loader.hide()
     createToast('Registration successful', { type: "success" })
     return router.push({name: 'DashboardIndex'});
   } catch (error) {
+    loader.hide()
     createToast(`${error?.response?.data ?? 'Unable to register. Try again later.'}`, { type: "danger" })
     console.log(error);    
   }

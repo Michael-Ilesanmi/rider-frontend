@@ -26,7 +26,7 @@
 
 <script setup>
 import { FwbInput, FwbButton, FwbHeading } from 'flowbite-vue';
-import { onMounted, reactive } from 'vue'
+import { inject, onMounted, reactive } from 'vue'
 import { useRouter } from 'vue-router';
 import { createToast } from 'mosha-vue-toastify';
 import axios from 'axios';
@@ -34,6 +34,7 @@ import { useUserStore } from '@/stores/user.js';
 
 const userStore = useUserStore();
 const router = useRouter()
+const $loading = inject("$loading");
 
 const payload = reactive({
   email: '',
@@ -41,14 +42,17 @@ const payload = reactive({
 })
 
 const login = async () => {
+  let loader = $loading.show()
   try {
     const { data } = await axios.post('/login', payload)
     userStore.setToken(data.payload.token)
     userStore.setUser(data.payload.user)
+    loader.hide()
     createToast('Login successful', { type: "success" })
     return router.push({name: 'DashboardIndex'});
   } catch (error) {
-    createToast(`${error?.response?.data ?? 'Unable to login. Try again later.'}`, { type: "danger" })
+    loader.hide()
+    createToast(`${error?.response?.data?.payload ?? 'Unable to login. Try again later.'}`, { type: "danger" })
     console.log(error);    
   }
 }

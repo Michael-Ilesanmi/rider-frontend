@@ -1,9 +1,13 @@
 <template>
-  <main class="flex flex-row relative">
-    <SideBar class="" />
-    <div>
+  <main class="flex flex-row relative max-h-screen">
+    <nav class="relative w-64 h-screen">
+      <SideBar />
+    </nav>
+    <div class="grow flex flex-col">
       <NavBar />
-      <router-view></router-view>
+      <div class="p-8 bg-gray-100 w-full grow overflow-y-auto">
+        <router-view></router-view>
+      </div>
     </div>
   </main>
 </template>
