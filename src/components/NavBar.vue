@@ -6,7 +6,7 @@
     </div>
     <div class="flex justify-end items-center space-x-4 w-fit ml-auto">
       <p>Hello <strong>{{ `${user.first_name ?? ''}`}}</strong></p>
-      <fwb-avatar img="https://api.iconify.design/iconoir/profile-circle.svg" class="hidden md:block cursor-pointer" rounded />
+      <fwb-avatar img="https://api.iconify.design/iconoir/profile-circle.svg" class="hidden md:block" rounded />
       <fwb-dropdown placement="left" class="md:hidden">
         <template #trigger>
           <fwb-avatar img="https://api.iconify.design/iconoir/profile-circle.svg" class="cursor-pointer" rounded />
