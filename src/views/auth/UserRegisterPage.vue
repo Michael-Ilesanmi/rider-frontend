@@ -83,7 +83,7 @@ const register = async () => {
     return router.push({name: 'DashboardIndex'});
   } catch (error) {
     loader.hide()
-    createToast(`${error?.response?.data ?? 'Unable to register. Try again later.'}`, { type: "danger" })
+    createToast(`${error?.response?.data?.payload ?? 'Unable to register. Try again later.'}`, { type: "danger" })
     console.log(error);    
   }
 }
