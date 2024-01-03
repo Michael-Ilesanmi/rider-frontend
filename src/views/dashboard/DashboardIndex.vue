@@ -11,12 +11,15 @@
                 <div class="w-full justify-between flex [&_p]:text-green-600 [&_p]:font-semibold [&_p]:text-sm [&_small]:text-[10px]">
                   <div>
                     <small>Pickup</small>
-                    <p>{{ order.pickup.city }}</p>
+                    <p>{{ order.pickup.name }}</p>
                   </div>
                   <div>
                     <small>Delivery</small>
-                    <p>{{ order.delivery.city }}</p>
+                    <p>{{ order.delivery.name }}</p>
                   </div>
+                </div>
+                <div class="h-80">
+                  <Map :locationA="{ lat: order.pickup.lat, lng:order.pickup.lng }" :locationB="{ lat: order.delivery.lat, lng: order.delivery.lng }" />
                 </div>
                 <div class="w-full justify-between flex [&_p]:text-green-600 [&_p]:font-semibold [&_p]:text-sm [&_small]:text-[10px]">
                   <div>
@@ -57,12 +60,15 @@
                 <div class="w-full justify-between flex [&_p]:text-green-600 [&_p]:font-semibold [&_p]:text-sm [&_small]:text-[10px]">
                   <div>
                     <small>Pickup</small>
-                    <p>{{ order.pickup.city }}</p>
+                    <p>{{ order.pickup.name }}</p>
                   </div>
                   <div>
                     <small>Delivery</small>
-                    <p>{{ order.delivery.city }}</p>
+                    <p>{{ order.delivery.name }}</p>
                   </div>
+                </div>
+                <div class="h-80">
+                  <Map :locationA="{ lat: order.pickup.lat, lng:order.pickup.lng }" :locationB="{ lat: order.delivery.lat, lng: order.delivery.lng }" />
                 </div>
                 <div class="w-full justify-between flex [&_p]:text-green-600 [&_p]:font-semibold [&_p]:text-sm [&_small]:text-[10px]">
                   <div>
@@ -130,6 +136,7 @@ import axios from 'axios';
 import { computed, inject, onMounted, ref } from 'vue';
 import { FwbAvatar, FwbModal, FwbButton } from 'flowbite-vue'
 import { createToast } from 'mosha-vue-toastify';
+import Map from "@/components/Map.vue";
 
 const $loading = inject('$loading');
 const orders = ref(null);

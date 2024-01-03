@@ -12,7 +12,11 @@ import {LoadingPlugin} from 'vue-loading-overlay';
 import 'vue-loading-overlay/dist/css/index.css';
 
 // axios defaults
-axios.defaults.baseURL = "https://rider-backend-production.up.railway.app/api/"
+axios.defaults.baseURL =
+    // eslint-disable-next-line no-undef
+    process.env.NODE_ENV == "development"
+        ? "http://127.0.0.1:8000/api/"
+        : "https://rider-backend-production.up.railway.app/api/";
 
 
 routeGuards();
