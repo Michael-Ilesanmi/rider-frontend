@@ -1,6 +1,6 @@
 <template>
-  <div class="w-full h-full">
-    <GoogleMap api-key="AIzaSyCyJxGQXDd-AOnYchsTZL5X_H5KjSMilss" style="width: 100%; height: 100%" :center="center" :zoom="15" ref="mapRef">
+  <div class="w-full h-full border-green-500 border-4">
+    <GoogleMap :api-key="GOOGLE_MAPS_API_KEY" style="width: 100%; height: 100%" :center="center" :zoom="15" ref="mapRef">
       <Marker :options="{ position: marker }" v-for="(marker, index) in myMarkers" :key="index" />
     </GoogleMap>
   </div>
@@ -17,6 +17,8 @@ export default defineComponent({
     locationB: Object,
   },
   setup(props) {
+    const GOOGLE_MAPS_API_KEY = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
+
     const mapRef = ref(null);
     const center = props.locationA;
     const myMarkers = [props.locationA, props.locationB];
@@ -51,7 +53,7 @@ export default defineComponent({
         }
       }, 500);
     });
-    return { center, myMarkers, lng, mapRef , address, props };
+    return { center, myMarkers, lng, mapRef , address, props , GOOGLE_MAPS_API_KEY};
   },
 });
 </script>

@@ -7,14 +7,14 @@
         </h2>
         <form class="space-y-4 mt-6" @submit.prevent="placeOrder()">
             <GoogleAddressAutocomplete 
-                apiKey="AIzaSyCyJxGQXDd-AOnYchsTZL5X_H5KjSMilss"
+                :apiKey="GOOGLE_MAPS_API_KEY"
                 v-model="payload.pickup"
                 @callback="assignPickupLocation"    
                 class="w-full rounded-md border-gray-300 bg-gray-50"
                 placeholder="Select pickup location"
             />
             <GoogleAddressAutocomplete 
-                apiKey="AIzaSyCyJxGQXDd-AOnYchsTZL5X_H5KjSMilss"
+                :apiKey="GOOGLE_MAPS_API_KEY"
                 v-if="payload.pickup"
                 v-model="payload.delivery"
                 @callback="assignDeliveryLocation"    
@@ -53,6 +53,8 @@ import { FwbSelect, FwbInput, FwbButton } from 'flowbite-vue'
 import axios from 'axios';
 import { createToast } from 'mosha-vue-toastify';
 import { useRouter } from 'vue-router';
+
+const GOOGLE_MAPS_API_KEY = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
 
 const router = useRouter();
 const $loading = inject("$loading");
